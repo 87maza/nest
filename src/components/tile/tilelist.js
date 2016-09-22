@@ -6,21 +6,18 @@ import Tile from './tile';
 import Data from './alpha';
 
 class TileList extends Component {
-
     constructor(props){
         super(props);
         this.state = {
             term: "",
             datas: Data
         }
-
     }
-
     updateSearch(e){
         this.setState({term: e.target.value});
     }
-    addContact(e){
-        e.preventDefault()
+    addTile(e){
+        e.preventDefault();
         let title = this.refs.title.value;
         let image = this.refs.image.value;
         let id = Math.floor((Math.random()*100)+1);
@@ -31,16 +28,15 @@ class TileList extends Component {
     }
 
     render() {
-        let filteredData = Data.filter(
-            (n) => {
+
+        let filteredData = Data.filter((n) => {
                 return n.title.toLowerCase().indexOf(this.state.term) !== -1;
             }
         );
         return (
-            <div className="placeholder">
-
+            <div className="row">
                 {filteredData.map((d)=> {
-                    return <Tile title={d.title} image={d.image} />
+                    return <Tile d={d} title={d.title} image={d.image} />
                 })
                 }
                 <h4>Filter Here:</h4>
@@ -50,7 +46,7 @@ class TileList extends Component {
                     value = {this.state.term}
                     onChange = {this.updateSearch.bind(this)}
                 />
-                <form onSubmit={this.addContact.bind(this)}>
+                <form onSubmit={this.addTile.bind(this)}>
                     <input type="text" ref="title"/>
                     <input type="text" ref="image"/>
                     <button type="submit">Add New Tiles</button>
