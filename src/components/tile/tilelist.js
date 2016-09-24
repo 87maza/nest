@@ -36,7 +36,7 @@ class TileList extends Component {
         return (
             <div className="row">
                 {filteredData.map((d)=> {
-                    return <Tile d={d} title={d.title} image={d.image} />
+                    return <Tile d={d} key={d.id} title={d.title} image={d.image} />
                 })
                 }
                 <h4>Filter Here:</h4>
